@@ -1,6 +1,6 @@
 (function() {
 	$(function() {
-		var generate, input, output, key, roleid, to, platform, short_urls, warning_body, qrinit;
+		var generate, input, output, c, key, roleid, to, platform, short_urls, warning_body, qrinit;
 		output = $("#output");
 		input = $("#input");
 		generate = $("#generate");
@@ -18,6 +18,11 @@
 		}
 
 		generate.on("click", function(event) {
+			if (c == input.val()){
+				return false;
+			}
+			qrinit = false;
+			$('#qrcode').html('');
 			output.val('');
 			key = request.QueryString('key') ? request.QueryString('key') : request.QueryString('keyid');
 			roleid = request.QueryString('roleid');	
@@ -49,13 +54,14 @@
 						console.log(short_urls);
 						var temp = {'pc':short_urls['pc'], 'm':short_urls['m'], 'wq':short_urls['wq']};
 						$.each(temp, function(k, v) {
-							$('#qrcode').append('<div class="col-xs-6 col-md-4 qrcode_'+k+'"></div>');
+							$('#qrcode').append('<div class="col-xs-6 col-md-3 qrcode_'+k+'"></div>');
 							$('.qrcode_'+k).qrcode({width: 150,height: 150, text: v});
 						});
 						qrinit = true;
 					}
 				});
 			}
+			c = input.val();
 		});
 	});
 }).call(this);
