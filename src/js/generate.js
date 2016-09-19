@@ -1,10 +1,11 @@
 (function() {
 	$(function() {
-		var generate, input, output, key, roleid, to, platform, warning_body;
+		var generate, input, output, key, roleid, to, platform, short, warning_body;
 		output = $("#output");
 		input = $("#input");
 		generate = $("#generate");
 		warning_body = $(".modal-body");
+		short = {};
 		
 		var request = {
 			QueryString : function(val)
@@ -31,14 +32,28 @@
 			if (!to) {
 				to = 'jd.com';
 			}
-			platform = {'pc':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+'&', 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to+'&'};
+			platform = {'pc':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to+'&'};
 			
 			if (key && roleid && to) {	
 				$.each(platform, function(k, v) {
 					output.val(!output.val() ? v : output.val()+'\n'+v);
-					console.log(v);
+					$.ajax({
+						url: 'http://api.weibo.com/2/short_url/shorten.json?source=2849184197&url_long='+encodeURIComponent(v),
+						type: "GET",
+						dataType: "JSONP",
+						jsonp: 'jsoncallback',
+						cache: false,
+						success: function(data) {
+							console.log(data);
+							short[k] = '';
+						}
+					});
 				});
+				//$(document).ajaxComplete(function(event, xhr, options) {
+				//	console.log(short);
+				//});
 			}
+
 		});
 	});
 }).call(this);
