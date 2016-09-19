@@ -1,11 +1,12 @@
 (function() {
 	$(function() {
-		var generate, input, output, key, roleid, to, platform, short, warning_body;
+		var generate, input, output, key, roleid, to, platform, short_urls, warning_body, qrinit;
 		output = $("#output");
 		input = $("#input");
 		generate = $("#generate");
 		warning_body = $(".modal-body");
-		short = {};
+		short_urls = {};
+		qrinit = false;
 		
 		var request = {
 			QueryString : function(val)
@@ -37,23 +38,24 @@
 			if (key && roleid && to) {	
 				$.each(platform, function(k, v) {
 					output.val(!output.val() ? v : output.val()+'\n'+v);
-					$.ajax({
-						url: 'http://api.weibo.com/2/short_url/shorten.json?source=2849184197&url_long='+encodeURIComponent(v),
-						type: "GET",
-						dataType: "JSONP",
-						jsonp: 'jsoncallback',
-						cache: false,
-						success: function(data) {
-							console.log(data);
-							short[k] = '';
-						}
-					});
+						var url = 'http://api.weibo.com/2/short_url/shorten.json?source=2849184197&url_long='+encodeURIComponent(v);
+						$.get('https://jsonp.afeld.me/?url='+encodeURIComponent(url), function(data){
+							//console.log(data);
+							short_urls[k] = data.urls[0].url_short;
+						});
 				});
-				//$(document).ajaxComplete(function(event, xhr, options) {
-				//	console.log(short);
-				//});
+				$(document).ajaxComplete(function(event, xhr, options) {
+					if (Object.keys(short_urls).length == 3 && !qrinit) {
+						console.log(short_urls);
+						var temp = {'pc':short_urls['pc'], 'm':short_urls['m'], 'wq':short_urls['wq']};
+						$.each(temp, function(k, v) {
+							$('#qrcode').append('<div class="col-xs-6 col-md-4 qrcode_'+k+'"></div>');
+							$('.qrcode_'+k).qrcode({width: 150,height: 150, text: v});
+						});
+						qrinit = true;
+					}
+				});
 			}
-
 		});
 	});
 }).call(this);
