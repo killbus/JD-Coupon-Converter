@@ -37,6 +37,8 @@
 			}
 			if (!to) {
 				to = 'jd.com';
+			} else if (to.substr(0,2) == '//') {
+				to = to.substr(2);
 			}
 			platform = {'pc':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to+'&'};
 			
@@ -54,7 +56,7 @@
 						console.log(short_urls);
 						var temp = {'pc':short_urls['pc'], 'm':short_urls['m'], 'wq':short_urls['wq']};
 						$.each(temp, function(k, v) {
-							$('#qrcode').append('<div class="col-xs-6 col-md-3 qrcode_'+k+'"></div>');
+							$('#qrcode').append('<div class="col-xs-6 col-md-3 qrcode_'+k+'" style="padding-bottom: 10px;"></div>');
 							$('.qrcode_'+k).qrcode({width: 150,height: 150, text: v});
 						});
 						qrinit = true;
