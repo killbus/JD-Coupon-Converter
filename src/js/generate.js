@@ -40,7 +40,7 @@
 			} else if (to.substr(0,2) == '//') {
 				to = to.substr(2);
 			}
-			platform = {'pc':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to+'&cu=true&utm_source=z.gaozhouba.com&utm_medium=tuiguang&utm_campaign=t_201603570_&utm_term=8288a59f42464de694abd1a7efdaf943&abt=3', 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to+'&cu=true&utm_source=z.gaozhouba.com&utm_medium=tuiguang&utm_campaign=t_201603570_&utm_term=8288a59f42464de694abd1a7efdaf943&abt=3', 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to+'&cu=true&utm_source=z.gaozhouba.com&utm_medium=tuiguang&utm_campaign=t_201603570_&utm_term=8288a59f42464de694abd1a7efdaf943&abt=3'};
+			platform = {'pc':'https://coupon.jd.com/ilink/couponActiveFront/front_index.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'pc2':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to+'&', 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to+'&'};
 			
 			if (key && roleid && to) {	
 				$.each(platform, function(k, v) {
@@ -52,9 +52,9 @@
 						});
 				});
 				$(document).ajaxComplete(function(event, xhr, options) {
-					if (Object.keys(short_urls).length == 3 && !qrinit) {
+					if (Object.keys(short_urls).length == 4 && !qrinit) {
 						console.log(short_urls);
-						var temp = {'pc':short_urls['pc'], 'm':short_urls['m'], 'wq':short_urls['wq']};
+						var temp = {'pc':short_urls['pc'], 'pc2':short_urls['pc2'], 'm':short_urls['m'], 'wq':short_urls['wq']};
 						$.each(temp, function(k, v) {
 							$('#qrcode').append('<div class="col-xs-6 col-md-3 qrcode_'+k+'" style="padding-bottom: 10px;"></div>');
 							$('.qrcode_'+k).qrcode({width: 150,height: 150, text: v});
