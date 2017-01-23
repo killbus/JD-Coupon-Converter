@@ -43,14 +43,18 @@
 		<td><label class="control-label" for="output">QRcodes</label></td>
 		<td style="width: 71.666666666%;"><div class="row"><div id="qrcode"></div></div></td>
 	</tr>
+	<tr style="display:none;">
+		<td><label class="control-label" for="debug">Console</label></td>
+		<td><textarea class="form-control" id="debug" rows="10" wrap="off"></textarea></td>
+	</tr>
   </tbody>
 </table>
 </div>
 
 <div class="modal fade warning" tabindex="-1" role="dialog" aria-labelledby="warning-head" aria-hidden="true">
   <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-		<div class="modal-header">
+    <div class="modal-content panel-warning">
+		<div class="modal-header panel-heading">
 			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 			<h4 class="modal-title" id="warning-head">警告！</h4>
 		</div>
