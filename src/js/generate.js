@@ -117,7 +117,7 @@
 					key = request.QueryString(url, 'key') ? request.QueryString(url, 'key') : request.QueryString(url, 'keyid');
 					roleid = request.QueryString(url, 'roleid');
 					to = request.QueryString(url, 'to') ? request.QueryString(url, 'to') : request.QueryString(url, 'rul');
-					batch = request.QueryString(url, 'batchId') ? "#batchId=" + request.QueryString(url, 'batchId') : "&"; 
+					//batch = request.QueryString(url, 'batchId') ? "#batchId=" + request.QueryString(url, 'batchId') : "&"; 
 					if (!key) {
 						warning_body.html('key 不能为空，请检查。');
 						$('.warning').modal();
@@ -131,7 +131,7 @@
 					} else if (to.substr(0,2) == '//') {
 						to = to.substr(2);
 					}
-					platform = {'pc':'https://coupon.jd.com/ilink/couponActiveFront/front_index.action?key='+key+'&roleId='+roleid+'&to='+to+batch, 'pc2':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to+batch, 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to+batch, 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to+batch};
+					platform = {'pc':'https://coupon.jd.com/ilink/couponActiveFront/front_index.action?key='+key+'&roleId='+roleid+'&to='+to, 'pc2':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to, 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to, 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to};
 					
 					if (key && roleid && to) {	
 						$.each(platform, function(k, v) {
