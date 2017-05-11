@@ -114,6 +114,20 @@
 			function init() {
 				var urls = input.val().split('\n').filter(function(n) { return n != ''});
 				$.each(urls, function(n, url) {
+					if (url.indexOf('btmkt.jd.com') >= 0) {
+						key = request.QueryString(url, 'key');
+						if (!key) {
+							warning_body.html('key 不能为空，请检查。');
+							$('.warning').modal();
+							return;
+						}
+						platform = {'pc':'https://btmkt.jd.com/activity/initParty?key='+key, 'm':'https://btmkt.jd.com/mobile/initMobile?key='+key};
+						$.each(platform, function(k, v) {
+							output.val(!output.val() ? v : output.val()+'\n'+v);
+						});
+						output.val(output.val() + '\n');
+						return;
+					}
 					key = request.QueryString(url, 'key') ? request.QueryString(url, 'key') : request.QueryString(url, 'keyid');
 					roleid = request.QueryString(url, 'roleid');
 					to = request.QueryString(url, 'to') ? request.QueryString(url, 'to') : request.QueryString(url, 'rul');
