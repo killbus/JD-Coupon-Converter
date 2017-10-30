@@ -95,7 +95,7 @@
 					}
 					console.log(data);
 					var coupon = data.coupon;
-					debug.val(!debug.val() ? skuid + ': ' + data.coupon : debug.val() + '\n' + skuid + ': ' + JSON.stringify(data.coupon));
+					debug.val(!debug.val() ? skuid + ': ' + JSON.stringify(data.coupon) : debug.val() + '\n' + skuid + ': ' + JSON.stringify(data.coupon));
 					$.each(coupon, function(k, v) {
 						var c = 'http://coupon.m.jd.com/coupons/show.action?key=' + v.encryptedKey + '&roleId=' + v.roleId + '&to=jd.com#batchId=' + v.batchId;
 						input.val(k == 0 ? c : input.val() + '\n' + c);
