@@ -145,7 +145,7 @@
 					} else if (to.substr(0,2) == '//') {
 						to = to.substr(2);
 					}
-					platform = {'pc':'https://coupon.jd.com/ilink/couponActiveFront/front_index.action?key='+key+'&roleId='+roleid+'&to='+to, 'pc2':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to, 'pc3':'http://act-jshop.jd.com/couponSend.html?callback=&roleId='+roleid+'&key='+key+'&pin=&_='+(new Date().getTime()), 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to, 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to};
+					platform = {'pc':'https://coupon.jd.com/ilink/couponActiveFront/front_index.action?key='+key+'&roleId='+roleid+'&to='+to, 'pc2':'http://coupon.jd.com/ilink/couponSendFront/send_index.action?key='+key+'&roleId='+roleid+'&to='+to, 'pc3':'http://act-jshop.jd.com/couponSend.html?callback=&ruleId='+roleid+'&key='+key+'&pin=&platform=0&_='+(new Date().getTime()), 'm':'http://coupon.m.jd.com/coupons/show.action?key='+key+'&roleId='+roleid+'&to='+to, 'm2':'http://s.m.jd.com/activemcenter/mfreecoupon/getcoupon?key='+key+'&roleId='+roleid+'&to='+to+'&_='+(new Date().getTime())+'&sceneval=2&callback=jsonpCBKA&g_ty=ls', 'wq':'http://wqs.jd.com/promote/2016/getcoupon/index.html?keyid='+key+'&roleid='+roleid+'&rurl='+to};
 					
 					if (key && roleid && to) {	
 						$.each(platform, function(k, v) {
